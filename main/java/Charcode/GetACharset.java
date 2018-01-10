@@ -3,6 +3,7 @@
  * name of each character set used to convert the sample string into an array of bytes. */
 package Charcode;
 
+import java.lang.String;
 import java.nio.charset.Charset;
 import java.util.Arrays;
 
