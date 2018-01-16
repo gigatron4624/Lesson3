@@ -11,7 +11,7 @@ public class GetACharset {
 
     /* Package-Private Methods */
 
-    /** barr converts a string to an array of bytes through a character set. (barr = byte array)
+    /** barr converts a string to an array of bytes using a character set. (barr = byte array)
      * Each byte in the array stores the numerical reference value of a character in a string.
      * Each reference value depends on the character set being applied.
      * @param ts is the test string
@@ -21,7 +21,7 @@ public class GetACharset {
         return ts.getBytes(cs); // encodes the test string into a sequence of bytes
     }
 
-    /** ByteCount counts the number of bytes in a string when converted to byte array through a character set.
+    /** ByteCount counts the number of bytes in a string after the string is converted to an array of bytes.
      * @param ba is the array of bytes to be analyzed
      * @return the number of bytes in the test string */
     int ByteCount(byte[] ba){
@@ -97,7 +97,7 @@ public class GetACharset {
         System.out.println(b2h(ba07));
         System.out.println();
 
-        byte[] ba08 = barr(ts,Charset.forName("UTF-32"));
+        byte[] ba08 = barr(ts,Charset.forName("UTF-32")); // 32 bit unicode
         System.out.println("8. UTF-32: " + ByteCount(ba08) + " bytes");
         System.out.println(b2d(ba08));
         System.out.println(b2h(ba08));
