@@ -39,7 +39,7 @@ public class Gitranscribe {
             feed = new FileInputStream(flf); // feed flf to FileInputStream
         } catch (FileNotFoundException tentacles){
             // Aww tentacles! The file is either missing, hidden, or in the wrong directory.
-            System.out.println("Error: Where's the file?"); // error message for FileNotFound exception
+            return "Error: Where's the file?"; // error message for FileNotFound exception
         }
 
         InputStreamReader isr = new InputStreamReader(feed, cs); // subjects file to character set
