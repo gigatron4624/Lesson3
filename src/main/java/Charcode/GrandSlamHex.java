@@ -88,7 +88,7 @@ public class GrandSlamHex {
         System.out.println(ccs); // prints ccs
 
         byte[] BA = TA(a); // BA = byte array (first input)
-        byte[] SDI = s2b(sdi); // SDI = single digit integers (second input)
+        byte[] SDI = s2b(ccs); // SDI = single digit integers (second input)
 
         String ds1 = b2d(BA); // ds1 = 1st input as string of decimal array
         System.out.println(ds1); // print ds1
