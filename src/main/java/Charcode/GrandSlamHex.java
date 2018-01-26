@@ -1,6 +1,7 @@
 /* This code accepts a test string and a byte array as inputs, encodes the inputs into base64 and base64url strings,
  * and prints the encoded strings and their resultant lengths to the console. The purpose of this code is to compare
- * base64 encoding to hexadecimal encoding. */
+ * base64 encoding to hexadecimal encoding. The byte array has 100 elements that are assiged numeric values from 0
+ * to 99. The test string is concatenated to itself 5 times before it is encoded. */
 package Charcode;
 
 import java.util.Arrays;
@@ -10,11 +11,12 @@ public class GrandSlamHex {
 
     /* Fields (Constants) */
     private String SDI = "0123456789"; // SDI = single digit integers
-    private int A = 100;
+    private int A = 100; // length of test array
 
     /* Package-Private Methods */
 
     /** Method ta generates a byte array of a specific length whose elements are assigned values from 0 to x-1.
+     * ta = test array
      * @param x is the number of elements in the byte array (i.e. byte array length);
      * @return a byte array that stores integers from 0 to x-1 in numeric order */
     byte[] ta(int x){
@@ -85,45 +87,63 @@ public class GrandSlamHex {
 
     private void ptoc(){
         String ccs = repeat(SDI); // ccs = concatenated character string
-        System.out.println(ccs); // prints ccs
-
-        byte[] ba = ta(A); // ba = byte array (first input)
+        byte[] ba = ta(A); // ba = byte array of values from 0 to 99; A = 100 (first input)
         byte[] csa = s2b(ccs); // csa = character string array (second input)
 
         String ds1 = b2d(ba); // ds1 = 1st input as string of decimal array
+        System.out.println("First input: byte array from 0 to 99");
         System.out.println(ds1); // print ds1
-        String ds2 = b2d(csa); // ds2 = 2nd input as string of decimal array
-        System.out.println(ds2); // print ds2
+        System.out.println();
 
         String hs1 = b2h(ba); // hs1 = 1st input as string of hex array
+        System.out.println("Hex Array 1: ");
         System.out.println(hs1); // print hs1
         System.out.println("Array Length = " + hs1.length()); // length of hs1 as full array
-        System.out.println("Hex Length = " + hs1.length()/2); // length of hs1 without spaces, brackets, ot commas
-
-        String hs2 = b2h(csa); // hs2 = 2nd array input as string of hex array
-        System.out.println(hs2); // print hs2
-        System.out.println("Array Length = " + hs2.length()); // length of hs2 as full array
-        System.out.println("Hex Length = " + hs2.length()/2); // length of hs2 without spaces, brackets, or commas
+        System.out.println("Total Hex Digits = " + hs1.length()/2); // length without spaces, brackets, or commas
+        System.out.println();
 
         // whomp1 is the 1st input encoded as a Base64 string.
         String whomp1 = whomp(ba);
+        System.out.println("Base-64 string 1: ");
         System.out.println(whomp1);
         System.out.println("Length = " + whomp1.length());
-
-        // whomp2 is the 2nd input encoded as a Base64 string.
-        String whomp2 = whomp(csa);
-        System.out.println(whomp2);
-        System.out.println("Length = " + whomp2.length());
+        System.out.println();
 
         // bomp1 is the 1st input encoded as Base64url string.
         String bomp1 = bomp(ba);
+        System.out.println("Base-64-URL string 1: ");
         System.out.println(bomp1);
         System.out.println("Length = " + bomp1.length());
+        System.out.println();
+
+        System.out.println("2nd input: Concatenated String"); // prints ccs
+        System.out.println(ccs);
+        System.out.println();
+        String ds2 = b2d(csa); // ds2 = 2nd input as string of decimal array
+        System.out.println("Byte reference numbers of 2nd input (UTF-8): ");
+        System.out.println(ds2); // print ds2
+        System.out.println();
+
+        String hs2 = b2h(csa); // hs2 = 2nd array input as string of hex array
+        System.out.println("Hex Array 2: ");
+        System.out.println(hs2); // print hs2
+        System.out.println("Array Length = " + hs2.length()); // length of hs2 as full array
+        System.out.println("Total Hex Digits = " + hs2.length()/2); // length without spaces, brackets, or commas
+        System.out.println();
+
+        // whomp2 is the 2nd input encoded as a Base64 string.
+        String whomp2 = whomp(csa);
+        System.out.println("Base-64 string 2: ");
+        System.out.println(whomp2);
+        System.out.println("Length = " + whomp2.length());
+        System.out.println();
 
         // bomp2 is the first input encoded as Base64url string.
         String bomp2 = bomp(csa);
+        System.out.println("Base-64-URL string 2: ");
         System.out.println(bomp2);
         System.out.println("Length = " + bomp2.length());
+        System.out.println();
     }
 
     /* Main Method */
