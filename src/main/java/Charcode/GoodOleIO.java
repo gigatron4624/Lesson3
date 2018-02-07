@@ -16,7 +16,8 @@ public class GoodOleIO {
 
     /** gnf: generate new file. This method uses the File constructor to create a new file and allocates it to
      * the parent directory. It may throw an IO Exception.
-     * @param fn represents the name of the new file (fn: file name) */
+     * @param fn represents the name of the new file (fn: file name)
+     * File names are relative to project directory.*/
     void gnf(String fn){
 
         // Creating the new file might throw an IO exception.
