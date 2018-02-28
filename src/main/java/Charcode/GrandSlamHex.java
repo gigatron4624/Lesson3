@@ -9,9 +9,9 @@ import java.util.Base64;
 
 public class GrandSlamHex {
 
-    /* Fields (Constants) */
+    /* Fields: They can be constant, but constant fields are static and final.  */
     private String SDI = "0123456789"; // SDI = single digit integers
-    private int A = 100; // length of test array
+    private int A = 100; // length of test array with values from 0 to 99
 
     /* Package-Private Methods */
 
@@ -30,8 +30,7 @@ public class GrandSlamHex {
 
     /** Repeat concatenates a string to itself until it reaches a length of 50.
      * @param s is the string
-     * @return the self-concatenated string
-     */
+     * @return the self-concatenated string*/
     String repeat(String s){
         StringBuilder root = new StringBuilder(s); // initialize a root string
 
@@ -93,7 +92,7 @@ public class GrandSlamHex {
         String ds1 = b2d(ba); // ds1 = 1st input as string of decimal array
         System.out.println("First input: byte array from 0 to 99");
         System.out.println(ds1); // print ds1
-        System.out.println();
+        System.out.println(); // new line
 
         String hs1 = b2h(ba); // hs1 = 1st input as string of hex array
         System.out.println("Hex Array 1: ");
@@ -148,8 +147,7 @@ public class GrandSlamHex {
 
     /* Main Method */
 
-    public static void main(String[] args){
-
+    public static void main(String[] args) {
         GrandSlamHex gsh = new GrandSlamHex(); // instantiates object
         gsh.ptoc(); // prints all content to console
     }
