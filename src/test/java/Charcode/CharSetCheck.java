@@ -3,14 +3,14 @@
 * of each character set to properly encode characters into bytes. */
 package Charcode;
 
-import java.nio.charset.Charset;
-import java.util.Arrays;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import java.nio.charset.Charset;
+import java.util.Arrays;
 
 public class CharSetCheck {
 
-    /* Fields: These are constant values. */
+    /* Fields: They are not necessarily constant unless classified as static and final. */
     private String s = "Mama Mia!"; // this is a sample string
     private int sl = s.length(); // sl = length of sample string
 
@@ -34,7 +34,7 @@ public class CharSetCheck {
      * An assertion error occurs if the string returns an incorrect byte sum for one or more character sets.
      * @return error message indicating an incorrect byte sum */
     private String oops(){
-        return "Oops!";
+        return "Oops! Some bytes are missing!";
     }
 
     /** ByteSumArray converts a string to an array of bytes using barr and counts bytes using ByteCount.
@@ -49,7 +49,7 @@ public class CharSetCheck {
 
         // fills each element with a byte sum
         bsa[0] = gac.ByteCount(gac.barr(p,CS01)); // UTF-8: 1 byte per string character
-        bsa[1] = gac.ByteCount(gac.barr(p, CS02)); // US-ASCII: 1 byte per string character
+        bsa[1] = gac.ByteCount(gac.barr(p,CS02)); // US-ASCII: 1 byte per string character
         bsa[2] = gac.ByteCount(gac.barr(p,CS03)); // ISO-8859-1: 1 byte per string character
         bsa[3] = gac.ByteCount(gac.barr(p,CS04)); // UTF-16: 2 bytes per string character + 2 BOMs
         bsa[4] = gac.ByteCount(gac.barr(p,CS05)); // UTF16BE: 2 bytes per string character
