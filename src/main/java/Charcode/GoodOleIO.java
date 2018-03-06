@@ -36,7 +36,7 @@ public class GoodOleIO {
         // catch IO exception if the target directory of the file is either missing or locked
         catch (IOException oops){
             // The target directory of the file either doesn't exist or cannot be accessed.
-            System.out.println("Houston. We have a problem.");
+            System.out.println("Houston. We have a problem. " + oops.getMessage());
         }
     }
 
@@ -59,7 +59,7 @@ public class GoodOleIO {
             // 1. The target text file is missing.
             // 2. The text file cannot be either accessed or modified.
             // 3. FileWriter is writing to a directory when it can't.
-            System.out.println("IO Exception: The file is either missing or locked.");
+            System.out.println("The file is either missing or locked. " + oops.getMessage());
         }
     }
 
@@ -88,7 +88,7 @@ public class GoodOleIO {
         // The file that is being accessed is either absent or a directory.
         catch (FileNotFoundException ouch){
             // The read function cannot read a directory or empty space.
-            return "File not found! Searching oblivion is forbidden sucker!";
+            return "File not found! Searching oblivion is forbidden sucker! " + ouch.getMessage();
         }
         return pull.toString(); // converts data to strings and prints strings to console
     }
@@ -121,13 +121,13 @@ public class GoodOleIO {
     public static void main(String[] args) throws IOException{
 
         GoodOleIO goio = new GoodOleIO(); // instantiates object
-        String fn1 = "weegee"; // fn1: file name 1
+        String fn1 = "weegee.txt"; // fn1: file name 1
         String ts1 = "I hope she made lots of spaghetti!"; // ts1: test string #1
         goio.gnf(fn1); // creates blank file named "weegee"
         goio.fill(fn1, ts1); // writes test string #1 to file "weegee"
         System.out.println(goio.inspect(fn1)); // reads "weegee"
         System.out.println(goio.cfe(fn1)); // checks if "weegee" exists
-        String fn2 = "malleo"; // fn2: file name 2
+        String fn2 = "malleo.txt"; // fn2: file name 2
         String ts2 = "I do too!"; // ts2: test string #2
         goio.gnf(fn2); // creates blank file named "malleo"
         goio.fill(fn2, ts2); // writes test string #2 to "malleo"
