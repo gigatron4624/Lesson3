@@ -1,10 +1,10 @@
-/** This program yields the same results as GoodOleIO. The implementation of this code has some slight differences.
+/** This program yields the same results as GoodOleIO. The implementation of this code has several differences.
  * 1. This code applies BufferedWriter and BufferedReader to buffer the character streams. Buffering the streams
  * improves efficiency by writing/reading lines of characters as opposed to writing/reading one character at a time.
  * 2. The usage of BufferedReader to read buffered streams dispenses the need for a string builder.
  * 3. The inspect call has a void return type as it uses System.out.println instead of return.
  * 4. The fill and inspect calls may throw additional IO exceptions due to buffering.
- *  */
+ * 5. This code deletes both files. GoodOleIO only deletes 1 file. */
 
 package Charcode;
 
@@ -42,7 +42,7 @@ public class BufferMeUpScotty {
         // catch IO exception if the target directory of the file is either missing or locked
         catch (IOException oops){
             // The target directory of the file either doesn't exist or cannot be accessed.
-            System.out.println("Houston. We have a problem.");
+            System.out.println("Houston. We have a problem. " + oops.getMessage());
         }
     }
 
@@ -59,16 +59,15 @@ public class BufferMeUpScotty {
             BufferedWriter bt = new BufferedWriter(wtf); // bt: buffered text
             bt.write(ts); // write test string to file using buffer
             bt.newLine(); // separate lines of text
-            bt.flush(); // flushes the stream before closing it
             bt.close(); // closes the character stream
         }
 
-        // catches IO exception thrown by FileWriter, BufferedWriter, write(), newLine(), flush(), or close()
+        // catches IO exception thrown by FileWriter, BufferedWriter, write(), newLine(),  or close()
         catch (IOException oops){
             // 1. The target text file is missing.
             // 2. The text file cannot be either accessed or modified.
             // 3. FileWriter is writing to a directory when it can't.
-            System.out.println("IO Exception: The file is either missing or locked.");
+            System.out.println("The file is either missing or locked. " + oops.getMessage());
         }
     }
 
@@ -92,7 +91,7 @@ public class BufferMeUpScotty {
         // The file that is being accessed is either absent or a directory.
         catch (FileNotFoundException ouch){
             // The read function cannot read a directory or empty space.
-            System.out.println("File not found! Searching oblivion is forbidden sucker!");
+            System.out.println("Searching oblivion is forbidden sucker! " + ouch.getMessage());
         }
     }
 
@@ -124,13 +123,14 @@ public class BufferMeUpScotty {
     public static void main(String[] args) throws IOException{
 
         BufferMeUpScotty bmus = new BufferMeUpScotty(); // instantiates object
-        String fn1 = "weegee"; // fn1: file name 1
+        String fn1 = "weegee.txt"; // fn1: file name 1
         String ts1 = "I hope she made lots of spaghetti!"; // ts1: test string #1
         bmus.gnf(fn1); // creates blank file named "weegee"
         bmus.fill(fn1, ts1); // writes test string #1 to file "weegee"
         bmus.inspect(fn1); // reads "weegee"
         System.out.println(bmus.cfe(fn1)); // checks if "weegee" exists
-        String fn2 = "malleo"; // fn2: file name 2
+        System.out.println(bmus.purge(fn1)); // deletes "weegee"
+        String fn2 = "malleo.txt"; // fn2: file name 2
         String ts2 = "I do too!"; // ts2: test string #2
         bmus.gnf(fn2); // creates blank file named "malleo"
         bmus.fill(fn2, ts2); // writes test string #2 to "malleo"
