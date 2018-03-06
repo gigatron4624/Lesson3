@@ -12,7 +12,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class ANewInterface {
-
+    
     /* NIO Methods */
 
     /** This method generates a file path based on the file name using the FileSystems and Path classes.
@@ -31,11 +31,10 @@ public class ANewInterface {
             // the new file is named after its path
             Files.createFile(p); // create blank file in a specific location based on the path
         }
-
         // catch IO exception in the event that the file path/name is not unique
         catch (IOException oops){
             // Creating identical files is forbidden.
-            System.out.println("IO Exception: Duplicates hoard disk space!");
+            System.out.println("Duplicate files hoard disk space! " + oops.getMessage());
         }
     }
 
@@ -64,10 +63,9 @@ public class ANewInterface {
         try(BufferedWriter bw = Files.newBufferedWriter(p)) {
             bw.write(ts); // writes string to file using default character set: UTF-8
         }
-
-        // catch IO exception if permission to modify file is denied.
+        // catch IO exception if permission to write to file is denied or target file does not exist
         catch(IOException oops){
-            System.out.println("IO Exception: File is either missing or locked."); // can't write to file
+            System.out.println("File is either missing or locked. " + oops.getMessage());
         }
     }
 
@@ -84,10 +82,9 @@ public class ANewInterface {
                 chain = br.readLine(); // reads next line
             }
         }
-
-        // Catch IO exception if permission to read file is denied.
+        // Catch IO exception if permission to read file is denied or file is non-existent
         catch(IOException oops){
-            System.out.println("IO Exception: File is missing, locked, or write-only."); // can't read file
+            System.out.println("File is missing, locked, or write-only." + oops.getMessage());
         }
     }
 
@@ -105,10 +102,10 @@ public class ANewInterface {
         try{
             Files.delete(p); // delete file
         }
-
         // catch IO exception if file was never created or already deleted
         catch (IOException oops){
-            System.out.println("IO Exception: Can't delete empty space!"); // why bother deleting empty space?
+            // why bother deleting empty space?
+            System.out.println("You can't delete empty space! " + oops.getMessage());
         }
     }
 
