@@ -34,24 +34,24 @@ public class TrialByFile2 extends BufferMeUpScotty {
         gnf(fn1); // create file 1 (weegee)
         File ff = new File(fn1); // ff = first file (file already exists; this is just for reference)
         boolean yeah = ff.isFile() && !ff.isHidden(); // first file exists as text file
-        Assert.assertTrue(yeah,boo()); // Did GoodOleIO successfully create the file?
+        Assert.assertTrue(yeah,boo()); // Did BufferMeUpScotty successfully create the file?
 
         gnf(fn2); // create file 2 (malleo)
         File sf = new File (fn2); // sf = second file (file already exists; this is just for reference)
         yeah = sf.isFile() && !sf.isHidden(); // second file exists as test file
-        Assert.assertTrue(yeah, boo()); // Did GoodOleIO successfully create the file?
+        Assert.assertTrue(yeah, boo()); // Did BufferMeUpScotty successfully create the file?
     }
 
     @Test
     void testFill() throws Exception {
         testGnf(); // This is called so the assertion tests in testFill won't fail due to missing files.
         File ff = new File(fn1); // this is just an instance (see testGnf)
-        Assert.assertTrue(ff.canWrite(),boo()); // May GoodOleIO modify the file?
+        Assert.assertTrue(ff.canWrite(),boo()); // May BufferMeUpScotty modify the file?
         fill(fn1,ts1); // write test string #1 into file 1
         Assert.assertFalse(ff.length() == 0, boo()); // Does the file contain text?
 
         File sf = new File(fn2); // this is just an instance (see testGnf)
-        Assert.assertTrue(sf.canWrite(),boo()); // May GoodOleIO modify the file?
+        Assert.assertTrue(sf.canWrite(),boo()); // May BufferMeUpScotty modify the file?
         fill(fn2,ts2); // write test string #2 into file 2
         Assert.assertFalse(sf.length() == 0, boo()); // Does the file contain text?
     }
@@ -59,11 +59,11 @@ public class TrialByFile2 extends BufferMeUpScotty {
     @Test
     void testInspect() throws Exception {
         File ff = new File(fn1); // this is just an instance (see testGnf)
-        Assert.assertTrue(ff.canRead(),boo()); // May GoodOleIO read the file?
+        Assert.assertTrue(ff.canRead(),boo()); // May BufferMeUpScotty read the file?
         inspect(fn1); // read file 1
 
         File sf = new File(fn2); // this is just an instance (see testGnf)
-        Assert.assertTrue(sf.canRead(),boo()); // May GoodOleIO read the file?
+        Assert.assertTrue(sf.canRead(),boo()); // May BufferMeUpScotty read the file?
         inspect(fn2); // read file 2
     }
 
