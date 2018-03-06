@@ -24,7 +24,8 @@ public class TrialByFile1 extends GoodOleIO {
     /* Test Methods */
     /* 1. GoodOleIO creates two normal and visible (not hidden) files. Neither file is a directory.
      * 2. GoodOleIO has permission to modify each file and subsequently adds text to each file.
-     * 3. GoodOleIO has permission to read each file and prints each file's contents to the console.
+     * 3. GoodOleIO has permission to read each file. GoodOleIO then reads each file and prints the contents
+     * of each file to the console.
      * 4. GoodOleIO successfully gets rid of each test file if asked to do so. */
 
 
@@ -59,11 +60,15 @@ public class TrialByFile1 extends GoodOleIO {
     void testInspect() throws Exception {
         File ff = new File(fn1); // this is just an instance (see testGnf)
         Assert.assertTrue(ff.canRead(),boo()); // May GoodOleIO read the file?
-        inspect(fn1); // read file 1
+        String clip1 = inspect(fn1); // read file 1
+        Assert.assertFalse(clip1.equals(""),boo());
+        System.out.print(clip1); // print contents of file 1 to console
 
         File sf = new File(fn2); // this is just an instance (see testGnf)
         Assert.assertTrue(sf.canRead(),boo()); // May GoodOleIO read the file?
-        inspect(fn2); // read file 2
+        String clip2 = inspect(fn2); // read file 2
+        Assert.assertFalse(clip2.equals(""),boo());
+        System.out.println(clip2); // print contents of file 2 to console
     }
 
     @Test
