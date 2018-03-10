@@ -26,10 +26,12 @@ public class TrialByFile1 extends GoodOleIO {
      * 2. GoodOleIO has permission to modify each file and subsequently adds text to each file.
      * 3. GoodOleIO has permission to read each file. GoodOleIO then reads each file and prints the contents
      * of each file to the console.
-     * 4. GoodOleIO successfully gets rid of each test file if asked to do so. */
+     * 4. GoodOleIO successfully gets rid of each test file if asked to do so.
+     * Note: TestNG methods run in an indeterminate order unless specified by annotations. This code
+     * uses the dependsOnMethods function to ensure the tests succeed in the proper order.*/
 
 
-    @Test
+    @Test(alwaysRun = true)
     void testGnf() throws Exception {
         gnf(fn1); // create file 1 (weegee)
         File ff = new File(fn1); // ff = first file (file already exists; this is just for reference)
@@ -42,9 +44,8 @@ public class TrialByFile1 extends GoodOleIO {
         Assert.assertTrue(yeah, boo()); // Did GoodOleIO successfully create the file?
     }
 
-    @Test
+    @Test(dependsOnMethods = {"testGnf"})
     void testFill() throws Exception {
-        testGnf(); // This is called so the assertion tests in testFill won't fail due to missing files.
         File ff = new File(fn1); // this is just an instance (see testGnf)
         Assert.assertTrue(ff.canWrite(),boo()); // May GoodOleIO modify the file?
         fill(fn1,ts1); // write test string #1 into file 1
@@ -56,7 +57,7 @@ public class TrialByFile1 extends GoodOleIO {
         Assert.assertFalse(sf.length() == 0, boo()); // Does the file contain text?
     }
 
-    @Test
+    @Test(dependsOnMethods = {"testFill"})
     void testInspect() throws Exception {
         File ff = new File(fn1); // this is just an instance (see testGnf)
         Assert.assertTrue(ff.canRead(),boo()); // May GoodOleIO read the file?
@@ -71,7 +72,7 @@ public class TrialByFile1 extends GoodOleIO {
         System.out.println(clip2); // print contents of file 2 to console
     }
 
-    @Test
+    @Test(dependsOnMethods = {"testInspect"})
     void testPurge() throws Exception {
         File ff = new File(fn1); // this is just an instance (see testGnf)
         boolean goner = purge(fn1); // delete the first file
