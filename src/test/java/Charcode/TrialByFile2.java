@@ -26,10 +26,12 @@ public class TrialByFile2 extends BufferMeUpScotty {
      * 2. BufferMeUpScotty has permission to modify each file and subsequently adds text to each file.
      * 3. BufferMeUpScotty has permission to read each file and prints each file's contents to the console.
      * The inspect method is declared void in BufferMeUpScotty, so a data type needn't be declared for testing.
-     * 4. BufferMeUpScotty successfully gets rid of each test file if asked to do so. */
+     * 4. BufferMeUpScotty successfully gets rid of each test file if asked to do so.
+     * Note: TestNG methods run in an indeterminate order unless specified by annotations. This code
+     * includes priorities to ensure the tests succeed in the proper order.*/
 
 
-    @Test
+    @Test(priority = 1)
     void testGnf() throws Exception {
         gnf(fn1); // create file 1 (weegee)
         File ff = new File(fn1); // ff = first file (file already exists; this is just for reference)
@@ -42,9 +44,8 @@ public class TrialByFile2 extends BufferMeUpScotty {
         Assert.assertTrue(yeah, boo()); // Did BufferMeUpScotty successfully create the file?
     }
 
-    @Test
+    @Test(priority = 2)
     void testFill() throws Exception {
-        testGnf(); // This is called so the assertion tests in testFill won't fail due to missing files.
         File ff = new File(fn1); // this is just an instance (see testGnf)
         Assert.assertTrue(ff.canWrite(),boo()); // May BufferMeUpScotty modify the file?
         fill(fn1,ts1); // write test string #1 into file 1
@@ -56,7 +57,7 @@ public class TrialByFile2 extends BufferMeUpScotty {
         Assert.assertFalse(sf.length() == 0, boo()); // Does the file contain text?
     }
 
-    @Test
+    @Test(priority = 3)
     void testInspect() throws Exception {
         File ff = new File(fn1); // this is just an instance (see testGnf)
         Assert.assertTrue(ff.canRead(),boo()); // May BufferMeUpScotty read the file?
@@ -67,7 +68,7 @@ public class TrialByFile2 extends BufferMeUpScotty {
         inspect(fn2); // read file 2
     }
 
-    @Test
+    @Test (priority = 4)
     void testPurge() throws Exception {
         File ff = new File(fn1); // this is just an instance (see testGnf)
         boolean goner = purge(fn1); // delete the first file
