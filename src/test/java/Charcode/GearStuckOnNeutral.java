@@ -39,7 +39,7 @@ public class GearStuckOnNeutral extends TheGSONMenace {
      * 4. Do the zip codes match? */
 
     @Test(alwaysRun = true)
-    void testGetters(){
+    void testGetters() throws Exception{
 
         TheGSONMenace tgm1 = new TheGSONMenace(tag, location, city, zone); // initialize 1st Address instance
         Gson shift = new GsonBuilder().create(); // builds a GSON instance
