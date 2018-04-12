@@ -15,9 +15,17 @@ public class TheGSONMenace {
     private String city; // Come on! Every address needs a city right?
     private int zone; // zone is the zip code
 
-    /* Address Instantiation */
+    /* No Argument Constructor */
+    TheGSONMenace(){
+        tag = "";
+        location = "";
+        city = "";
+        zone = 0;
+    }
 
-    /** This method generates an Address instance with occupied fields. [1]
+    /* Address Instantiation Constructor */
+
+    /** This constructor generates an Address instance with occupied fields. [1]
      * @param tag is the name of the place
      * @param location is the address of the place
      * @param city is the city in which the address is located
@@ -29,7 +37,7 @@ public class TheGSONMenace {
         this.zone = zone; // sets the zip code
     }
 
-    /* Getters: They obtain the necessary variables. [1] */
+    /* Getters: These methods obtain the necessary variables. [1] */
 
     /** @return the name/tag */
     String getTag(){
