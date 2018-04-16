@@ -15,6 +15,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.io.UnsupportedEncodingException;
 import java.util.Base64;
 
@@ -135,7 +136,7 @@ public class TungsticAcidRain {
 
         // Perhaps your JVM encountered an error.
         catch (UnsupportedEncodingException bogus){
-            return "Your JVM caught a bug. " + bogus.getMessage(); // catch the UnsupportedEncodingException.
+            return "Your JVM caught a bug. " + bogus.getMessage(); // catch the UnsupportedEncodingException
         }
     }
 
@@ -147,6 +148,18 @@ public class TungsticAcidRain {
         return peat.equals(repeat); // Do the strings match?
     }
 
+    /** clearcontents deletes the contents within a file without deleting the file itself.
+     * @param fn is the name of the file */
+    void clearcontents(String fn){
+        try{
+            RandomAccessFile fullfile = new RandomAccessFile(fn,"rw");
+            fullfile.setLength(0); // target file becomes blank
+        }
+        catch(IOException oops){
+            System.out.println(oops.getMessage()); // catch the IO Exception
+        }
+    }
+
     /* Main Method */
 
     /**@param args carries the command line argument as an array of strings.
@@ -155,18 +168,18 @@ public class TungsticAcidRain {
 
         TungsticAcidRain tar = new TungsticAcidRain(); // instantiate object
         String wolf = "tungstensulfite.txt"; // source of original JSON string
-
         String s0 = tar.inspect(wolf); // reads the original JSON string from source file
         System.out.println(s0); // prints the original JSON string to console
-        tar.gnf("scheelite.txt"); // create new file as a destination for the encoded JSON string
+        tar.gnf("scheelite.txt"); // create new storage file as a destination for the encoded JSON string
         String s1 = tar.bomp(s0); // encodes JSON string into Base64-URL characters
         System.out.println(s1); // prints encoded Base64-URL string to console
         System.out.println(s1.length()); // yields length of encoded string
-        tar.fill("scheelite.txt", s1); // exports encoded Base64-URL string to file
-        String s2 = tar.inspect("scheelite.txt"); // re-import the previously exported string
+        tar.fill("scheelite.txt", s1); // exports encoded Base64-URL string to storage file
+        String s2 = tar.inspect("scheelite.txt"); // re-import the previously exported string from storage file
         System.out.println(s2); // prints imported Base64-URL string
         String s3 = tar.ba2s(tar.pmob(s2)); // decodes imported string into reconstructed JSON string
         System.out.println(s3); // prints decoded JSON string
         System.out.println(tar.carboncopy(s0,s3)); // checks if the reconstructed string matches the original string
+        tar.clearcontents("scheelite.txt"); // empties the storage file
     }
 }
