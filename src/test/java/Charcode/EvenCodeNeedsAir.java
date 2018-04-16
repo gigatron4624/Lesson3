@@ -19,17 +19,19 @@ public class EvenCodeNeedsAir extends TungsticAcidRain {
 
     @Test
     void testBomp() throws Exception {
-        String ejs1 = inspect("scheelite.txt"); // encoded JSON string 1
-        int bs1cs = ejs1.length(); // should be 1485
+        String ejs1 = bomp(inspect("tungstensulfite.txt")); // encoded JSON string 1
+        System.out.println(ejs1);
+        int bs1cs = ejs1.length(); // should be 1484
+        System.out.println(bs1cs);
         char lb64uc = ejs1.charAt(bs1cs-1); // last base64 character
-        Assert.assertTrue((bs1cs-1) % 4 == 0, boo()); // Is the length of the encoded string divisible by 4?
-        Assert.assertFalse(lb64uc == '=',boo()); // Does the string need padding?
+        Assert.assertTrue(bs1cs % 4 == 0, boo()); // Is the length of the encoded string divisible by 4?
+        Assert.assertFalse(lb64uc != '=',boo()); // Does the string need padding?
     }
 
     @Test
     void testCarboncopy() throws Exception {
         String ojs = inspect("tungstensulfite.txt"); // original JSON string
-        String rjs = ba2s(pmob(inspect("scheelite.txt"))); // reconstructed JSON string
+        String rjs = ba2s(pmob(bomp(ojs))); // reconstructed JSON string
         Assert.assertTrue(carboncopy(ojs,rjs), boo()); // do they match?
     }
 }
