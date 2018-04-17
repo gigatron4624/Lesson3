@@ -21,7 +21,7 @@ import java.util.Base64;
 
 public class TungsticAcidRain {
 
-    /* Methods */
+    /* Package-Private Methods */
 
     /** bomp encodes a string into a chain of bytes, stores the bytes into an array, and converts the byte array to a
      *  base64url string. A bomp is also an enemy in Super Mario 64 (1996).
@@ -29,7 +29,7 @@ public class TungsticAcidRain {
      * @return a Base64url representation of the input string */
     String bomp(String s){
 
-        // Encoding the string will throw an exception if the string is null.
+        // Caution: Encoding the string will throw an exception if the string is null.
         try{
             return Base64.getUrlEncoder().encodeToString(s.getBytes()); // uses URL-safe encoder
         }
@@ -46,7 +46,7 @@ public class TungsticAcidRain {
      * File names are relative to project directory. */
     void gnf(String fn){
 
-        // Creating the new file might throw an IO exception.
+        // Warning: Creating the new file might throw an IO exception.
         try{
             File bf = new File(fn); // bf: blank file with specified name
             // check if the newly created file has a unique file name
@@ -70,7 +70,7 @@ public class TungsticAcidRain {
      * @param es is the encoded base-64-url string to be written to the file. */
     void fill(String fn, String es){
 
-        // Writing to the target file might throw an IO exception.
+        // Achtung! Writing to the target file might throw an IO exception.
         try{
             FileWriter wtf = new FileWriter(fn,true); // wtf: write to file
             BufferedWriter bt = new BufferedWriter(wtf); // bt: buffered text
@@ -93,7 +93,7 @@ public class TungsticAcidRain {
      * @throws IOException if the file is restricted (i.e. can't open or read file contents) */
     String inspect(String fn) throws IOException{
 
-        // Attempting to read the target file might throw a File Not Found Exception.
+        // Note: Attempting to read the target file might throw a File Not Found Exception.
         try{
             FileReader rf = new FileReader(fn); // rf: read file
             BufferedReader br = new BufferedReader(rf); // br = buffered reader
@@ -129,9 +129,9 @@ public class TungsticAcidRain {
      * @return a string of UTF-8 characters */
     String ba2s(byte[] b){
 
-        // Warning: Converting the byte array to a string might throw an UnsupportedEncodingException.
+        // Danger: Converting the byte array to a string might throw an UnsupportedEncodingException.
         try{
-            return new String(b, "UTF-8");
+            return new String(b, "UTF-8"); // return a UTF-8 string
         }
 
         // Perhaps your JVM encountered an error.
@@ -151,23 +151,33 @@ public class TungsticAcidRain {
     /** clearcontents deletes the contents within a file without deleting the file itself.
      * @param fn is the name of the file */
     void clearcontents(String fn){
+
+        // Alert: This method might throw an IO Exception.
         try{
-            RandomAccessFile fullfile = new RandomAccessFile(fn,"rw");
-            fullfile.setLength(0); // target file becomes blank
+            // The mode "rw" grants permission to read from and write to the file being accessed.
+            RandomAccessFile occufile = new RandomAccessFile(fn,"rw"); // occufile: a file that is not empty
+            occufile.setLength(0); // target file becomes blank
         }
+
+        // IO Exception if setLength is too large or too small
         catch(IOException oops){
-            System.out.println(oops.getMessage()); // catch the IO Exception
+            System.out.println("Oops! " + oops.getMessage()); // catch the IO Exception
         }
     }
 
     /* Main Method */
 
     /**@param args carries the command line argument as an array of strings.
-     * @throws Exception if any methods call throw an exception of any type. */
+     * @throws Exception if any methods call throw an exception of any type.
+     * Wolf is short for wolframite, the primary source of tungsten.
+     * Tungsten has a symbol of W, while sulfur dioxide has a formula of SO2. Sulfur dioxide is an oxide. Ergo,
+     * tungsten sulfoxide is thus a pun on WSO2. The original JSON string contains references to WSO2, so the source
+     * file of the original JSON string was named appropriately.
+     * Scheelite is also an ore that is rich with tungsten. The destination file is thus named scheelite. */
     public static void main(String[] args) throws Exception {
 
-        TungsticAcidRain tar = new TungsticAcidRain(); // instantiate object
-        String wolf = "tungstensulfite.txt"; // source of original JSON string
+        TungsticAcidRain tar = new TungsticAcidRain(); // instantiate object; abbreviations come in handy
+        String wolf = "tungstensulfoxide.txt"; // source of original JSON string
         String s0 = tar.inspect(wolf); // reads the original JSON string from source file
         System.out.println(s0); // prints the original JSON string to console
         tar.gnf("scheelite.txt"); // create new storage file as a destination for the encoded JSON string
